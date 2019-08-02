@@ -24,5 +24,6 @@ run_edgeRLRT <- function(L) {
        tt = tt,
        df = data.frame(pval = tt$table$PValue,
                        padj = tt$table$FDR,
-                       row.names = rownames(tt$table)))
+                       row.names = rownames(tt$table),
+                       lfc = tt$table$logFC))
 }
