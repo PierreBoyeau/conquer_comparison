@@ -22,6 +22,7 @@ run_MASTcpm <- function(L) {
        timing = timing,
        res = mast,
        df = data.frame(pval = mast[, "hurdle", "Pr(>Chisq)"],
-                         lfc = lfcs[, 'logFC'],
-                         row.names = names(mast[, "hurdle", "Pr(>Chisq)"])))
+                       lfc = lfcs[, 'logFC'],
+                       var_lfc = lfcs[, 'varLogFC'],
+                       row.names = names(mast[, "hurdle", "Pr(>Chisq)"])))
 }
