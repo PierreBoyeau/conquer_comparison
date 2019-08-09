@@ -1,6 +1,6 @@
 suppressPackageStartupMessages(library(DESeq2))
 
-run_DESeq2 <- function(L) {
+run_DESeq2 <- function(L, lfcThreshold = 0.0) {
   message("DESeq2")
   session_info <- sessionInfo()
   timing <- system.time({
@@ -9,7 +9,7 @@ run_DESeq2 <- function(L) {
                                   design = ~condition)
     dds <- DESeq(dds)
     res <- results(dds, contrast = c("condition", levels(factor(L$condt))[1], 
-                                     levels(factor(L$condt))[2]), alpha = 0.05)
+                                     levels(factor(L$condt))[2]), alpha = 0.05, lfcThreshold = lfcThreshold)
   })
   
   plotDispEsts(dds)
