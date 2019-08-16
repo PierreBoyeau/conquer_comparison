@@ -10,8 +10,7 @@ run_edgeRLRT <- function(L) {
     dge <- estimateDisp(dge, design = design)
     fit <- glmFit(dge, design = design)
     lrt <- glmLRT(fit)
-    # tt <- topTags(lrt, n = Inf)
-    tt <- lrt
+    tt <- topTags(lrt, n = Inf, sort.by = "none")
   })
   
   plotBCV(dge)

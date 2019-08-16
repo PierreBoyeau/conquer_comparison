@@ -10,8 +10,7 @@ run_edgeRLRTrobust <- function(L) {
     dge <- estimateGLMRobustDisp(dge, design = design)
     fit <- glmFit(dge, design = design)
     lrt <- glmLRT(fit)
-    tt <- lrt
-    # tt <- topTags(lrt, n = Inf)
+    tt <- topTags(lrt, n = Inf, sort.by = "none")
   })
   
   plotBCV(dge)
