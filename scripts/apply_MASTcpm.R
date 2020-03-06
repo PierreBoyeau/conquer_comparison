@@ -67,6 +67,6 @@ run_MASTcpm_multibatch <- function(L) {
   
   list(session_info = session_info,
        timing = timing,
-       res = mast,
+      #  res = mast,
        df = df)
 }
