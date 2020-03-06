@@ -37,7 +37,7 @@ run_MASTcpm <- function(L) {
 }
 
 run_MASTcpm_multibatch <- function(L) {
-  message("MAST, CPM")
+  message("MAST, CPM MULTI BATCHES")
   session_info <- sessionInfo()
   timing <- system.time({
     stopifnot(all(names(L$condt) == colnames(L$count)))
