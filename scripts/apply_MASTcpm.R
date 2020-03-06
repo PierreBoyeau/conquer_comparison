@@ -52,9 +52,9 @@ run_MASTcpm_multibatch <- function(L) {
     summaryCond <- summary(zlmdata, doLRT=TRUE)
     summaryDt <- summaryCond$datatable
     fcHurdle <- merge(
-                    summaryDt[contrast=='grp2' & component=='H',.(primerid, `Pr(>Chisq)`)],
+                    summaryDt[contrast=='L$condt2' & component=='H',.(primerid, `Pr(>Chisq)`)],
                         #hurdle P values
-                    summaryDt[contrast=='grp2' & component=='logFC', .(primerid, coef, ci.hi, ci.lo)],
+                    summaryDt[contrast=='L$condt2' & component=='logFC', .(primerid, coef, ci.hi, ci.lo)],
                     by='primerid' #logFC coefficients
     )
     df = data.frame(pval = fcHurdle$"Pr(>Chisq)",
@@ -67,6 +67,5 @@ run_MASTcpm_multibatch <- function(L) {
   
   list(session_info = session_info,
        timing = timing,
-      #  res = mast,
        df = df)
 }
