@@ -42,13 +42,12 @@ run_MASTcpm_multibatch <- function(L) {
   timing <- system.time({
     stopifnot(all(names(L$condt) == colnames(L$count)))
     grp <- L$condt
-    batches <- L$batch
     dge <- DGEList(counts = L$count)
     dge <- edgeR::calcNormFactors(dge)
     cpms <- edgeR::cpm(dge)
     sca <- FromMatrix(exprsArray = log2(cpms + 1), 
                       cData = data.frame(grp = grp))
-    zlmdata <- zlm(~grp + batches, sca)
+    zlmdata <- zlm(~L$condt + L$batch, sca)
     
     summaryCond <- summary(zlmdata, doLRT=TRUE)
     summaryDt <- summaryCond$datatable
@@ -65,7 +64,6 @@ run_MASTcpm_multibatch <- function(L) {
     # mast <- lrTest(zlmdata, "grp")
     # lfcs <- getLogFC(zlmdata)
   })
-  hist(mast[, "hurdle", "Pr(>Chisq)"], 50)
   
   list(session_info = session_info,
        timing = timing,
