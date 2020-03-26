@@ -28,11 +28,9 @@ run_MASTcpm <- function(L) {
     df <- df[order(as.numeric(row.names(df))),]
 
   })
-  hist(mast[, "hurdle", "Pr(>Chisq)"], 50)
   
   list(session_info = session_info,
        timing = timing,
-       res = mast,
        df = df)
 }
 
