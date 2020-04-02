@@ -16,10 +16,15 @@ run_MASTcpm <- function(L) {
 
     summaryCond <- summary(zlmdata, doLRT=TRUE)
     summaryDt <- summaryCond$datatable
+    
+    contrasts_levels <- levels(summaryDt$contrast)
+    str_filter <- function(str) startsWith(str, prefix="grp")
+    admissible_keys <- Filter(str_filter, contrasts_levels)
+    admissible_key <- admissible_keys[1]
     fcHurdle <- merge(
-                    summaryDt[contrast=='grp2' & component=='H',.(primerid, `Pr(>Chisq)`)],
+                    summaryDt[contrast==admissible_key & component=='H',.(primerid, `Pr(>Chisq)`)],
                         #hurdle P values
-                    summaryDt[contrast=='grp2' & component=='logFC', .(primerid, coef, ci.hi, ci.lo)],
+                    summaryDt[contrast==admissible_key & component=='logFC', .(primerid, coef, ci.hi, ci.lo)],
                     by='primerid' #logFC coefficients
     )
     df = data.frame(pval = fcHurdle$"Pr(>Chisq)",
